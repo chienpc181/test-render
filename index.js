@@ -1,9 +1,11 @@
 const express = require('express');
 const { getPublicToken } = require('./services/aps.js');
+const cors = require('cors');
 require('dotenv').config();
 
 let app = express();
 app.use(express.static('public'));
+app.use(cors());
 
 app.get('/', async function (req, res, next) {
     try {
