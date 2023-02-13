@@ -1,4 +1,5 @@
 const express = require('express');
+const { getPublicToken } = require('./services/aps.js');
 require('dotenv').config();
 
 let app = express();
@@ -15,6 +16,14 @@ app.get('/', async function (req, res, next) {
 app.get('/test', async function (req, res, next) {
     try {
         res.json({name: 'chien'});
+    } catch (err) {
+        next(err);
+    }
+});
+
+app.get('/auth/token', async function (req, res, next) {
+    try {
+        res.json(await getPublicToken());
     } catch (err) {
         next(err);
     }
